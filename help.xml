@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?><helpItems schema="maml">
+<command:command
+	xmlns:maml="http://schemas.microsoft.com/maml/2004/10"
+	xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10"
+	xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10"
+	xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+
+	<command:details>
+		<!--Add name an synopsis here-->
+		<maml:description>
+			<maml:para>
+				Скрипт предназначен для настройки рабочей станции (ПК) с предустанвленной OS Windows 7[10] и инсталяции СПО ЗАО "ПЕЛЕНГ".
+			</maml:para>
+		</maml:description>
+		<maml:copyright>
+			<maml:para />
+		</maml:copyright>
+	</command:details>
+
+	<maml:description>
+		<!--Add detailed description here-->
+		<maml:para>
+			Скрипта предназначен для конфигурирование OS Windows и установки дополнительного програмного обеспечения, необходимого для работы СПО производства ЗАО "ПЕЛЕНГ".
+			Предусмотрена интерактивная работа и "тихая" - без запросов, в этом случае применяются настройки из файла конфигурации без запроса подтверждения пользователем.
+		</maml:para>
+	</maml:description>
+
+	<command:syntax>
+		<!--Add syntax information here-->
+	</command:syntax>
+
+	<command:parameters>
+		<!--Add parameter information here-->
+		<command:parameter required="false" globbing="true" pipelineInput="false" position="named">
+			<maml:name>Dbg</maml:name>
+			<maml:description>
+				<maml:para>
+					[1,2...] - включить отладочный режим. Будет производится вывод дополнительной информации."
+				</maml:para>
+			</maml:description>
+			<dev:possiblevalues>
+				<dev:possiblevalue>
+					<dev:value>2</dev:value>
+				</dev:possiblevalue>
+			</dev:possiblevalues>
+		</command:parameter>
+
+		<command:parameter required="false" globbing="true" pipelineInput="false" position="named">
+			<maml:name>FileConfig</maml:name>
+			<maml:description>
+				<maml:para>
+					[path\to\file.ext]
+					использовать file.ext для конфигурирования процесса установки, если не задан, то ищется файл с именем main.xml.
+				</maml:para>
+			</maml:description>
+			<dev:possiblevalues>
+				<dev:possiblevalue>
+					<dev:value>2</dev:value>
+				</dev:possiblevalue>
+			</dev:possiblevalues>
+		</command:parameter>
+
+		<command:parameter required="false" globbing="true" pipelineInput="false" position="named">
+			<maml:name>FileLog</maml:name>
+			<maml:description>
+				<maml:para>
+					[path\to\file.ext]
+					включить режим вывода информации в файл [по умолчанию - $env:PROGRAMDATA\logfiles\install.log].
+				</maml:para>
+			</maml:description>
+			<dev:possiblevalues>
+				<dev:possiblevalue>
+					<dev:value>2</dev:value>
+				</dev:possiblevalue>
+			</dev:possiblevalues>
+		</command:parameter>
+
+		<command:parameter required="false" globbing="true" pipelineInput="false" position="named">
+			<maml:name>Verbose</maml:name>
+			<maml:description>
+				<maml:para>
+					если задан, то включает вывод информации в консоль;
+					если не задан, то вывод в консоль будет отключён, при параметрах -Dbg или -GUI не имеет значения. По умолчанию выключен.
+				</maml:para>
+			</maml:description>
+			<dev:possiblevalues>
+				<dev:possiblevalue>
+					<dev:value>2</dev:value>
+				</dev:possiblevalue>
+			</dev:possiblevalues>
+		</command:parameter>
+
+		<command:parameter required="false" globbing="true" pipelineInput="false" position="named">
+			<maml:name>Id</maml:name>
+			<maml:description>
+				<maml:para>
+					[n] установить номер изделия, где n:
+						1 - СМАР-Т
+						2 - Мастер
+						3 - АСК
+						4 - Тахион
+						5 - Информационный сервер
+						6 - Плановый сервер
+						7 - ТДК [Блок Связи]
+				</maml:para>
+			</maml:description>
+			<dev:possiblevalues>
+				<dev:possiblevalue>
+					<dev:value>2</dev:value>
+				</dev:possiblevalue>
+			</dev:possiblevalues>
+		</command:parameter>
+
+		<command:parameter required="false" globbing="true" pipelineInput="false" position="named">
+			<maml:name>Block</maml:name>
+			<maml:description>
+				<maml:para>
+	[				[n] установить номер блока, где n=1,2...
+				</maml:para>
+			</maml:description>
+			<dev:possiblevalues>
+				<dev:possiblevalue>
+					<dev:value>2</dev:value>
+				</dev:possiblevalue>
+			</dev:possiblevalues>
+		</command:parameter>
+
+		<command:parameter required="false" globbing="true" pipelineInput="false" position="named">
+			<maml:name>GUI</maml:name>
+			<maml:description>
+				<maml:para>
+					разрешить графический интерфейс [GUI]. По умолчанию выбран режим командной строки [CLI].
+				</maml:para>
+			</maml:description>
+			<dev:possiblevalues>
+				<dev:possiblevalue>
+					<dev:value>2</dev:value>
+				</dev:possiblevalue>
+			</dev:possiblevalues>
+		</command:parameter>
+
+		<command:parameter required="false" globbing="true" pipelineInput="false" position="named">
+			<maml:name>Clear</maml:name>
+			<maml:description>
+				<maml:para>
+					сбросить все заданные ранее настройки [флаги] и выполнить скрипт с запросом всех параметров.
+				</maml:para>
+			</maml:description>
+			<dev:possiblevalues>
+				<dev:possiblevalue>
+					<dev:value>2</dev:value>
+				</dev:possiblevalue>
+			</dev:possiblevalues>
+		</command:parameter>
+
+		<command:parameter required="false" globbing="true" pipelineInput="false" position="named">
+			<maml:name>Force</maml:name>
+			<maml:description>
+				<maml:para>
+					подавить все запросы ("тихий" режим).
+				</maml:para>
+			</maml:description>
+			<dev:possiblevalues>
+				<dev:possiblevalue>
+					<dev:value>2</dev:value>
+				</dev:possiblevalue>
+			</dev:possiblevalues>
+		</command:parameter>
+
+	</command:parameters>
+
+
+
+	<command:inputTypes>
+		<!--Add input type information here-->
+	</command:inputTypes>
+
+	<command:returnValues>
+		<!--Add return value information here-->
+	</command:returnValues>
+
+	<maml:alertSet>
+		<!--Add Note information here-->
+		Copyright (C) 2020 Dmitriy L. Ivanov aka onepif
+		JSC PELENG 2020
+
+		This program is free software; you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation; either version 2 of the License, or
+		(at your option) any later version.
+
+		This program is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	See the
+		GNU General Public License for more details.
+
+		You should have received a copy of the GNU General Public License
+		along with this program; if not, write to the Free Software
+		Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
+	</maml:alertSet>
+
+	<command:examples>
+		<!--Add cmdlet examples here-->
+		.\main.ps1 -i 2 -b 1 -Force
+		будет выполнена "тихая" установка СПО "Мастер" на ПК с назначением ему имени "BOI-1"
+	</command:examples>
+
+	<maml:relatedLinks>
+		<!--Add links to related content here-->
+		http://www.outsidethebox.ms/18237/
+		https://poshgui.com/Editor
+		https://remontka.pro/disable-updates-windows-10/
+	</maml:relatedLinks>
+</command:command>
+
+<!-->
+.Role
+	Администратор
+<!-->

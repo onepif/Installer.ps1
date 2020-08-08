@@ -1,0 +1,11 @@
+1. планировщик:
+https://docs.microsoft.com/en-us/powershell/module/psscheduledjob/register-scheduledjob?view=powershell-5.1
+
+2. 
+$p = [Environment]::GetEnvironmentVariable("PSModulePath")
+$p += ";C:\Program Files\Fabrikam Technologies\Fabrikam Manager\Modules\"
+[Environment]::SetEnvironmentVariable("PSModulePath",$p)
+
+3. https://docs.microsoft.com/ru-ru/powershell/scripting/developer/module/installing-a-powershell-module?view=powershell-7
+
+4. 
