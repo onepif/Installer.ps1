@@ -15,7 +15,7 @@ if( !(Test-Path ("$env:PROGRAMFILES\OpenSSH")) ){
 	if( !$Force ){
 		Write-Host
 		choice /c ynq /n /m "Install OpenSSH? [Y/n]: "
-		if( $LASTEXITCODE -eq 3 ){ Work-Int }
+		if( $LASTEXITCODE -eq 3 ){ Stop-Work }
 		if( $LASTEXITCODE -eq 1 ){
 			if( [Environment]::Is64BitOperatingSystem ){ $fNAME = "OpenSSH-Win64" } else { $fNAME = "OpenSSH-Win32" }
 

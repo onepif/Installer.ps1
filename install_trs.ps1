@@ -18,14 +18,7 @@ $LIST = @( "ru", "po1", "dl1", "dl2", "zip" )
 
 Out-Logging -out $FileLog -src $MyInvocation.MyCommand.Name -m "Install TRS pack... "
 
-if( !(Test-Path -Path $Data.PATH_PELENG) ) { New-Item -type Directory -Path $Data.PATH_PELENG -Force *>$null }
-foreach( $ix in (Get-ChildItem -Path $SOFT_INST\tdk\*.zip).Name ){
-	Expand-Archive -LiteralPath $SOFT_INST\tdk\$ix -Destination "$($Data.PATH_PELENG)" -Force
-	if( $? ){ CMD_Ok } else {
-		CMD_Err
-		Out-Logging -out $FileLog -src $MyInvocation.MyCommand.Name -t e -m "Unpacking error" -cr
-	}
-}
+foreach( $ix in (Get-ChildItem -Path $SOFT_INST\tdk\*.zip).Name ){ Install-Soft "$SOFT_INST\tdk\$ix" }
 CMD_EMPTY
 
 Out-Logging -out $FileLog -src $MyInvocation.MyCommand.Name -m "Make scripts... "

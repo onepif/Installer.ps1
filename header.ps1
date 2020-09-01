@@ -1,15 +1,13 @@
 <#
-  ./header.cmd
-
-  The header configuration script.
-
-  Developer Dmitriy L. Ivanov aka onepif
-  CJSC PELENG 2020
-  All rights reserved
+  ./header.ps1
+.Synopsis
+	The header configuration script.
+.NOTES
+	Copyright (C) 2020 Dmitriy L. Ivanov aka onepif
+	CJSC PELENG 2020
 #>
 
 $OutputEncoding = [Console]::OutputEncoding = [Text.UTF8Encoding]::UTF8
-#[Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding("utf-8")
 
 $GLOBAL:SOFT_ENV	= "$(Split-Path -Path $(Split-Path -Path $MyInvocation.MyCommand.Path))\soft_environment"
 $GLOBAL:SOFT_INST	= "$(Split-Path -Path $(Split-Path -Path $MyInvocation.MyCommand.Path))\soft_install"
@@ -25,6 +23,8 @@ if (Test-Path $var)
 else
 {
 	$GLOBAL:Data = '{
+		"IMF"			: 0,
+
 		"SMART"			: 1,
 		"MASTER"		: 2,
 		"RTS"			: 3,
@@ -35,7 +35,7 @@ else
 
 		"DEVICE"		:
 		[
-			"SMART", "MASTER", "RTS", "TACHYON", "SERVER", "AVIA", "TRS"
+			 "IMF", "SMART", "MASTER", "RTS", "TACHYON", "SERVER", "AVIA", "TRS"
 		],
 		"DEV_SMART"		: [ "Recorder", "Recorder", "Recorder", "Recorder", "Player3", "Player3", "Player3", "Player3", "VGrabber" ],
 
@@ -43,8 +43,8 @@ else
 
 		"PATH_PELENG"	: "",
 		"TMP"			: "C:\\Tmp",
-		"pRUN"			: "$env:PROGRAMDATA\\Peleng\\run",
-		"pLOG"			: "$env:PROGRAMDATA\\Peleng\\logfiles",
+		"pRUN"			: "C:\\ProgramData\\Peleng\\run",
+		"pLOG"			: "C:\\ProgramData\\Peleng\\logfiles",
 
 		"rsyncCFG": "/cygdrive/C/Windows"
 	}' | ConvertFrom-Json

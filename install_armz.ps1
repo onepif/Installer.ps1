@@ -55,31 +55,16 @@ $Version = $jsonCFG.SMART.Recorder.version
 if( !$Force ){
 	Write-Host
 	$var = Read-Host "Specify the build number of software for installation, setup_armz_[ $Version ]"
-	if( $var ){ if( $var -eq "Q" ){ Work-Int } else { $Version = $var } }
+	if( $var ){ if( $var -eq "Q" ){ Stop-Work } else { $Version = $var } }
 }
 CMD_Dbg 2 $MyInvocation.MyCommand.Name "Version=$Version"
 
-Out-Logging -out $FileLog -src $MyInvocation.MyCommand.Name -m "Install ARMz... "
-if( Test-Path -Path $SOFT_INST\smar-t\setup_armz_$Version.zip ) {
-	Expand-Archive -LiteralPath $SOFT_INST\smar-t\setup_armz_$Version.zip -Destination "$($Data.PATH_PELENG)" -Force
-	if( $? ){ CMD_OkCr } else {
-		CMD_ErrCr
-		Out-Logging -out $FileLog -src $MyInvocation.MyCommand.Name -t e -m "Unpacking error" -cr
-	}
-} elseif( Test-Path -Path $SOFT_INST\smar-t\setup_armz_$Version.exe ) {
-	& "$SOFT_INST\smar-t\setup_armz_$Version.exe"
-	Wait-Process setup_armz_$Version
-	Remove-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run' -Name "ARMZ" -Force *>$null
-	CMD_DnCr
-} else	{
-	CMD_ErrCr
-	Out-Logging -out $FileLog -src $MyInvocation.MyCommand.Name -t e -m "File $SOFT_INST\smar-t\setup_armz_$Version.zip[exe] not found" -cr
-}
+if( Install-Soft "$SOFT_INST\smar-t\setup_armz_$Version.zip" -Force ){ Remove-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run' -Name "ARMZ" -Force *>$null }
 
 if( !$Force ){
 	Write-Host
 	choice /c ynq /n /m "Run configuring section? [y/n]: "
-	if( $LASTEXITCODE -eq 3 ){ Work-Int } elseif( $LASTEXITCODE -eq 1 ) { Run-Configure }
+	if( $LASTEXITCODE -eq 3 ){ Stop-Work } elseif( $LASTEXITCODE -eq 1 ) { Run-Configure }
 } else { Run-Configure }
 
 CMD_Dbg 1 $MyInvocation.MyCommand.Name "======== completed ========"

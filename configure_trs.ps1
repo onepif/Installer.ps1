@@ -38,11 +38,11 @@ if( $Args ){
 	"Select mode WS:"; "  1 - Exercise leader"; "  2 - Pilot Operator"; "  3 - Radar Dispatcher"; "  4 - Procedural Control Manager"; "  5 - Technical Supervisor"; "  6 - SPTA"
 	choice /c 123456q /n /m "?: "
 	$GLOBAL:ws = $LASTEXITCODE
-	if( $ws -eq 7 ){ Work-Int }
+	if( $ws -eq 7 ){ Stop-Work }
 	Write-Host
 	choice /c 1234567q /n /m "Specify the number WS [1..5]: "
 	$GLOBAL:NUMB_WS = $LASTEXITCODE
-	if( $NUMB_WS -eq 8 ){ Work-Int }
+	if( $NUMB_WS -eq 8 ){ Stop-Work }
 	$GLOBAL:ALIAS_WS = $LIST_ALIAS[$ws-1]
 	$GLOBAL:NAME_WS = $LIST_NAME[$ws-1]
 }

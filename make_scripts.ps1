@@ -6,10 +6,9 @@
 "Remove-Item -Recurse -Path `"$($Data.TMP)`" -Force *>`$null" >>$env:WINDIR\w32time.ps1
 "New-Item -ItemType Directory -Path `"$($Data.TMP)`" -Force *>`$null" >>$env:WINDIR\w32time.ps1
 
-Copy-Item .\reboot.ico -Destination $env:WINDIR *>$null
-Copy-Item .\coverPeleng.jpg -Destination $env:WINDIR\Web\Wallpaper\Windows\img1.jpg *>$null
+Copy-Item .\Share\reboot.ico -Destination $env:WINDIR *>$null
+Copy-Item .\Share\coverPeleng.jpg -Destination $env:WINDIR\Web\Wallpaper\Windows\img1.jpg *>$null
 
-Set-Content -Path $env:WINDIR\rc.SS.cmd   -Value "cmd.exe /u /c `"PowerShell -File $env:WINDIR\rc.SS.ps1 %*`""
 Set-Content -Path $env:WINDIR\reboot.cmd	-Value "shutdown /r /t 1"
 Set-Content -Path $env:WINDIR\poweroff.cmd	-Value "shutdown /s /t 1"
 Set-Content -Path $env:WINDIR\rst.cmd		-Value "$env:PROGRAMFILES\Intel\Intel(R) Rapid Storage Technology\IAStorUI.exe"
