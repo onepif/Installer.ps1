@@ -1,4 +1,5 @@
 {
+    "IMF":  0,
     "SMART":  1,
     "MASTER":  2,
     "RTS":  3,
@@ -7,6 +8,7 @@
     "PS":  6,
     "TRS":  7,
     "DEVICE":  [
+                   "IMF",
                    "SMART",
                    "MASTER",
                    "RTS",
@@ -22,10 +24,12 @@
                       "Recorder",
                       "Player3",
                       "Player3",
+                      "Player3",
+                      "Player3",
                       "VGrabber"
                   ],
     "USER_PELENG":  "User",
-    "PATH_PELENG":  "c:\\program files\\Peleng\\Player3",
+    "PATH_PELENG":  "c:\\Program Files (x86)\\peleng\\tachyon",
     "TMP":  "C:\\Tmp",
     "pRUN":  "C:\\ProgramData\\Peleng\\run",
     "pLOG":  "C:\\ProgramData\\Peleng\\logfiles",

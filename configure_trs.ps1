@@ -40,11 +40,13 @@ if( $Args ){
 	$GLOBAL:ws = $LASTEXITCODE
 	if( $ws -eq 7 ){ Stop-Work }
 	Write-Host
-	choice /c 1234567q /n /m "Specify the number WS [1..5]: "
-	$GLOBAL:NUMB_WS = $LASTEXITCODE
-	if( $NUMB_WS -eq 8 ){ Stop-Work }
-	$GLOBAL:ALIAS_WS = $LIST_ALIAS[$ws-1]
-	$GLOBAL:NAME_WS = $LIST_NAME[$ws-1]
+	$GLOBAL:NUMB_WS = Read_Host -Prompt "Specify the number WS [1..5]"
+    if(($NUMB_WS -gt 0) -and ($NUMB_WS -lt 6)){
+        $GLOBAL:ALIAS_WS = $LIST_ALIAS[$ws-1]
+	   $GLOBAL:NAME_WS = $LIST_NAME[$ws-1]
+    } else {
+        Stop-Work 
+    }
 }
 
 if( ($ws -eq 1) -or ($ws -ge 5) ){ Rename-PC "BS-$ALIAS_WS" } else { Rename-PC "BS-$ALIAS_WS$NUMB_WS" }

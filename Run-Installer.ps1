@@ -218,7 +218,7 @@ Function Main(){
 	}
 	CMD_Empty
 
-	Out-Logging -out $FileLog -src $MyInvocation.MyCommand.Name -m "Copy PS Modiles... "
+	Out-Logging -out $FileLog -src $MyInvocation.MyCommand.Name -m "Copy PS Modules... "
 	New-Item -type Directory "$env:WINDIR\System32\WindowsPowerShell\v1.0\Modules\PSPelengLibs\" -Force *>$null
 	if( $? ){ CMD_Ok } else { CMD_Err }
 	Copy-Item "lib.ps1" "$env:WINDIR\System32\WindowsPowerShell\v1.0\Modules\PSPelengLibs\PSPelengLibs.psm1" -Force *>$null

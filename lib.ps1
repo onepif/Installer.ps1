@@ -213,11 +213,12 @@ Function Rename-Lan(){
 			if( $Args ){ $IP_WS = $Args[0] } else { $IP_WS = $BLOCK }
 			for( $ix=0; $ix -lt (Get-NetAdapter).Count; $ix++ ){
 				Rename-NetAdapter -Name "$((Get-NetAdapter).Name[$ix])" -NewName "LAN$($ix+1)"
-				if( $LASTEXITCODE -eq 0 ){ CMD_Ok } else { CMD_Err }
+				if( $? ){ CMD_Ok } else { CMD_Err }
 			}
 			for( $ix=0; $ix -lt (Get-NetAdapter).Count; $ix++ ){
-				New-NetIPAddress -InterfaceAlias "LAN$($ix+1)" -IPAddress "$($jsonCFG.subNET).$($($jsonCFG.stepNET)*($ix+1)).$IP_WS" -PrefixLength 24 -DefaultGateway ($jsonCFG.subNET).($jsonCFG.stepNET)*($ix+1).2
-				if( $LASTEXITCODE -eq 0 ){ CMD_Ok } else { CMD_Err }
+				$var = "$($($jsonCFG.stepNET)*($ix+1))"
+				New-NetIPAddress -InterfaceAlias "LAN$($ix+1)" -IPAddress "$($jsonCFG.subNET).$var.$IP_WS" -PrefixLength 24 -DefaultGateway "$($jsonCFG.subNET).$var.2" *>$null
+				if( $? ){ CMD_Ok } else { CMD_Err }
 			}
 			CMD_Empty
 		} else { CMD_SkipCr }
@@ -227,7 +228,7 @@ Function Rename-Lan(){
 			Rename-NetAdapter -Name "$((Get-NetAdapter).Name)" -NewName "LAN1"
 			if( $LASTEXITCODE -eq 0 ){ CMD_Ok } else { CMD_Err }
 
-			New-NetIPAddress -InterfaceAlias "LAN1" -IPAddress "$($jsonCFG.subNET).$($jsonCFG.stepNET).$IP_WS" -PrefixLength 24 -DefaultGateway ($jsonCFG.subNET).($jsonCFG.stepNET).2
+			New-NetIPAddress -InterfaceAlias "LAN1" -IPAddress "$($jsonCFG.subNET).$($jsonCFG.stepNET).$IP_WS" -PrefixLength 24 -DefaultGateway "($jsonCFG.subNET).($jsonCFG.stepNET).2" *>$null
 			if( $LASTEXITCODE -eq 0 ){ CMD_Ok } else { CMD_Err }
 			CMD_Empty
 		} else { CMD_SkipCr }
